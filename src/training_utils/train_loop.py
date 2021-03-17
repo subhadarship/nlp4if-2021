@@ -1,9 +1,10 @@
 import logging
-from typing import Union, Tuple, Dict
+from typing import Union, Tuple, Dict, List
 
 import torch
 from tqdm import tqdm
 
+from data_utils import LabelField
 from data_utils import SMARTTOKDataLoader
 from model_utils import (
     MultitaskTransformerEncoderClassificationModel,
@@ -11,6 +12,7 @@ from model_utils import (
     MultitaskLogisticRegressionClassificationModel,
 )
 from .eval_metrics import compute_metrics
+from .postprocess import postprocess_labels
 
 logger = logging.getLogger(__name__)
 
@@ -82,7 +84,9 @@ def train(
 def evaluate(
         model: Union[
             MultitaskTransformerEncoderClassificationModel, MultitaskBertClassificationModel, MultitaskLogisticRegressionClassificationModel],
-        iterator: Union[SMARTTOKDataLoader], criterion
+        iterator: Union[SMARTTOKDataLoader], criterion,
+        label_fields: List[LabelField],
+        all_classes: List[str],
 ) -> Tuple[float, Dict[str, float]]:
     """Evaluate method"""
 
@@ -91,8 +95,7 @@ def evaluate(
 
     epoch_loss = 0.0
 
-    preda, predb, predc = [], [], []
-    labela, labelb, labelc = [], [], []
+    all_targets, all_preds = [], []
 
     val_meter = tqdm(iterator, desc='eval', unit=' batches', leave=False, total=0)
 
@@ -118,20 +121,26 @@ def evaluate(
             epoch_loss += loss.item()
 
             # compute prediction
-            pred_tuples = [logits[f'q{idx + 1}'].max(dim=1) for idx in range(7)]
-            preds = [pred for _, pred in pred_tuples]
+            preds = {k: v.max(dim=1)[1] for k, v in logits.items()}
 
-            preda.extend(preda_batch.detach().cpu().tolist())
-            labela.extend(targeta.detach().cpu().tolist())
-            predb.extend(predb_batch.detach().cpu().tolist())
-            labelb.extend(targetb.detach().cpu().tolist())
-            predc.extend(predc_batch.detach().cpu().tolist())
-            labelc.extend(targetc.detach().cpu().tolist())
+            all_targets.append({k: v.detach().cpu() for k, v in targets.items()})
+            all_preds.append({k: v.detach().cpu() for k, v in preds.items()})
 
+    # flatten
+    flattened_targets = torch.cat(
+        [torch.cat([_t[f'q{idx + 1}'].view(-1, 1) for idx in range(7)], dim=1) for _t in all_targets]).tolist()
+    flattened_preds = torch.cat(
+        [torch.cat([_p[f'q{idx + 1}'].view(-1, 1) for idx in range(7)], dim=1) for _p in all_preds]).tolist()
+
+    # postprocess
+    logger.info('postprocessing targets..')
+    flattened_targets_postprocessed = postprocess_labels(flattened_targets, label_fields)
+    logger.info('postprocessing predictions..')
+    flattened_preds_postprocessed = postprocess_labels(flattened_preds, label_fields)
     # compute metric
-    metrics = {
-        'two-way': compute_metrics(labela, preda),
-        'three-way': compute_metrics(labelb, predb),
-        'six-way': compute_metrics(labelc, predc),
-    }
+    metrics = compute_metrics(
+        gold_labels=flattened_targets_postprocessed,
+        predictions=flattened_preds_postprocessed,
+        all_classes=all_classes
+    )
     return epoch_loss / (batch_idx + 1), metrics

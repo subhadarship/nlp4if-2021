@@ -159,7 +159,9 @@ if __name__ == "__main__":
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 
     best_valid_loss = float('inf')
+    best_valid_f1 = -1
     valid_losses = []
+    valid_f1s = []
 
     logger.info('🌋  starting training..')
 
@@ -180,8 +182,11 @@ if __name__ == "__main__":
             model=model,
             iterator=data_dict['val_iter'],
             criterion=criterion,
+            label_fields=data_dict['LABELS'],
+            all_classes=["yes", "no"],
         )
         valid_losses.append(valid_loss)
+        valid_f1s.append(valid_metrics['f1'])
 
         end_time = time.time()
 
@@ -192,11 +197,11 @@ if __name__ == "__main__":
             f'train_loss: {train_loss:.3f} | '
             f'val_loss: {valid_loss:.3f}'
         )
-        logger.info(f'📣 val metrics 📣\n{create_table(valid_metrics)}')
+        logger.info(f'📣 val metrics 📣 {valid_metrics}')
 
-        if valid_loss <= best_valid_loss:
-            logger.info('\t--Found new best val loss')
-            best_valid_loss = valid_loss
+        if valid_metrics['f1'] >= best_valid_f1:
+            logger.info('\t--Found new best val f1')
+            best_valid_f1 = valid_metrics['f1']
             save_checkpoint(
                 checkpoint_dict={
                     'data_dict': {
@@ -209,11 +214,11 @@ if __name__ == "__main__":
                 model_dir=args.model_dir,
             )
 
-        # early stopping when the best val loss is lower than
-        # the last args.early_stopping_patience val losses
+        # early stopping when the best val f1 is greater than
+        # the last args.early_stopping_patience val f1 scores
         if args.early_stopping_patience is not None and \
-                len(valid_losses) > args.early_stopping_patience and \
-                all(best_valid_loss < loss for loss in valid_losses[-args.early_stopping_patience:]):
+                len(valid_f1s) > args.early_stopping_patience and \
+                all(best_valid_f1 > f1 for f1 in valid_f1s[-args.early_stopping_patience:]):
             logger.info('\t--STOPPING EARLY')
             break
 
@@ -228,16 +233,19 @@ if __name__ == "__main__":
     model.load_state_dict(checkpoint_dict['model_state_dict'])
 
     # compute val loss
-    best_valid_loss, best_valid_metrics = evaluate(args, model, data_dict['val_iter'], criterion)
+    best_valid_loss, best_valid_metrics = evaluate(model=model, iterator=data_dict['val_iter'], criterion=criterion,
+                                                   label_fields=data_dict['LABELS'], all_classes=["yes", "no"], )
     logger.info(
         f'best_val_loss: {best_valid_loss:.3f}'
     )
-    logger.info(f'📣 best validation metrics 📣\n{create_table(best_valid_metrics)}')
+    logger.info(f'📣 best validation metrics 📣 {best_valid_metrics}')
 
-    # compute test loss
-    logger.info(f'🔥 start testing..')
-    test_loss, test_metrics = evaluate(args, model, data_dict['test_iter'], criterion)
-    logger.info(
-        f'test_loss: {test_loss:.3f}'
-    )
-    logger.info(f'📣 test metrics 📣\n{create_table(test_metrics)}')
+    if data_dict['test_iter'] is not None:
+        # compute test loss
+        logger.info(f'🔥 start testing..')
+        test_loss, test_metrics = evaluate(model=model, iterator=data_dict['test_iter'], criterion=criterion,
+                                           label_fields=data_dict['LABELS'], all_classes=["yes", "no"], )
+        logger.info(
+            f'test_loss: {test_loss:.3f}'
+        )
+        logger.info(f'📣 test metrics 📣 {test_metrics}')
