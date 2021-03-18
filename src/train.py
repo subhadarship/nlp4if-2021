@@ -56,7 +56,7 @@ if __name__ == "__main__":
     """Load data"""
 
     train_df = load_dataframe(fpath=os.path.join(args.train_data_dir, 'train.tsv'))
-    val_df = load_dataframe(fpath=os.path.join(args.train_data_dir, 'dev.tsv'))
+    val_df = load_dataframe(fpath=os.path.join(args.dev_data_dir, 'dev.tsv'))
     test_df = None
 
     """Preprocess data"""
