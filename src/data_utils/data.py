@@ -26,7 +26,7 @@ class InfodemicDataset(Dataset):
 
         self.all_original_sentences = df[COLUMN_NAMES[0]].astype(str).tolist()
         self.labels = {
-            f'q{idx + 1}': df[COLUMN_NAMES[idx + 1]].astype(str) for idx in range(7)
+            f'q{idx + 1}': df[COLUMN_NAMES[idx + 1]].astype(str).tolist() for idx in range(7)
         }
 
         if self.build_vocab:
