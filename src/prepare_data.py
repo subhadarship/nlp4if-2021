@@ -1,6 +1,8 @@
 import os
 from shutil import copy
 
+from data_utils import load_dataframe
+
 if __name__ == "__main__":
 
     OUT_DIR = os.path.join('../data/prepared')
@@ -22,4 +24,6 @@ if __name__ == "__main__":
 
     for name, fname in zip(['train', 'dev'],
                            ['covid19_disinfo_binary_bulgarian_train.tsv', 'covid19_disinfo_binary_bulgarian_dev.tsv']):
-        copy(os.path.join(DATA_DIR_BULGARIAN, fname), os.path.join(OUT_DIR, f'{name}.bg.tsv'))
+        df = load_dataframe(os.path.join(DATA_DIR_BULGARIAN, fname))
+        df.rename(columns={'text': 'tweet_text'}, inplace=True)
+        df.to_csv(os.path.join(OUT_DIR, f'{name}.bg.tsv'), sep='\t', encoding='utf-8', index=False)

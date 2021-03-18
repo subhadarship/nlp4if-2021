@@ -13,7 +13,7 @@ def load_dataframe(fpath: str) -> pd.DataFrame:
     return pd.read_csv(fpath, sep='\t', encoding='utf-8', na_filter=False)
 
 
-def concat_dataframe(dfs: List[pd.DataFrame]) -> pd.DataFrame:
+def concat_dataframes(dfs: List[pd.DataFrame]) -> pd.DataFrame:
     """Concatenate dataframes"""
     return pd.concat(dfs)
 

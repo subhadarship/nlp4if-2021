@@ -1,5 +1,4 @@
 import logging
-import os
 import time
 
 import torch
@@ -7,7 +6,7 @@ from torch import nn
 
 from args_utils import get_train_args
 from data_utils import (
-    load_dataframe,
+    load_data,
     preprocess_bert_data,
     preprocess_data,
 )
@@ -55,9 +54,24 @@ if __name__ == "__main__":
 
     """Load data"""
 
-    train_df = load_dataframe(fpath=os.path.join(args.train_data_dir, 'train.tsv'))
-    val_df = load_dataframe(fpath=os.path.join(args.dev_data_dir, 'dev.tsv'))
-    test_df = None
+    train_df = load_data(
+        langs_with_num_samples=args.srclangs_with_num_samples,
+        data_dir=args.train_data_dir,
+        split_name='train',
+        random_seed=args.random_seed,
+    )
+    val_df = load_data(
+        langs_with_num_samples=args.trglang,
+        data_dir=args.dev_data_dir,
+        split_name='dev',
+        random_seed=args.random_seed,
+    )
+    test_df = load_data(
+        langs_with_num_samples=args.trglang,
+        data_dir=args.test_data_dir,
+        split_name='test',
+        random_seed=args.random_seed,
+    )
 
     """Preprocess data"""
 
