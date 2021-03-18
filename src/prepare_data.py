@@ -27,3 +27,9 @@ if __name__ == "__main__":
         df = load_dataframe(os.path.join(DATA_DIR_BULGARIAN, fname))
         df.rename(columns={'text': 'tweet_text'}, inplace=True)
         df.to_csv(os.path.join(OUT_DIR, f'{name}.bg.tsv'), sep='\t', encoding='utf-8', index=False)
+
+    # ar: change col name from 'text' to 'tweet_text'
+    for split_name in ['train', 'dev']:
+        df = load_dataframe(os.path.join(DATA_DIR_ARABIC, f'{split_name}.tsv'))
+        df.rename(columns={'text': 'tweet_text'}, inplace=True)
+        df.to_csv(os.path.join(OUT_DIR, f'{split_name}.ar.tsv'), sep='\t', encoding='utf-8', index=False)
