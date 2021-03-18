@@ -56,7 +56,7 @@ class SMARTTOKDataLoader(DataLoader):
                 sorted_order = sorted_order[:-self.num_very_long_samples]
 
             if self.progress_bar:
-                bar = tqdm(total=len(sorted_order), desc='initialize epoch', unit=' samples')
+                bar = tqdm(total=len(sorted_order), desc='initialize epoch', unit=' samples', leave=False)
 
             while True:
                 batch = self.create_batch(candidates=sorted_order, start_idx=len(sorted_order) - 1, direction=-1)
@@ -110,7 +110,7 @@ class SMARTTOKDataLoader(DataLoader):
         current_batch = []
         batch_size_so_far, max_sent_tokens = 0, 0
 
-        bar = tqdm(self.order, desc='initialize epoch', unit=' batches') if self.progress_bar else self.order
+        bar = tqdm(self.order, desc='initialize epoch', unit=' batches', leave=False) if self.progress_bar else self.order
         for idx in bar:
             # three cases for self.dataset[idx]:
             # 1. it goes to the current batch
