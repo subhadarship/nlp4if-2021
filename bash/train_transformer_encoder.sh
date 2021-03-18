@@ -8,7 +8,7 @@ GPUID=0
 # transformer encoder
 MODELNAME=transformer_encoder
 
-for TRGLANG in ar; do
+for TRGLANG in bg ar; do
   for HIDDIM in 128 256 512; do
     for VOCAB in 32000 16000 8000; do
       # zero
