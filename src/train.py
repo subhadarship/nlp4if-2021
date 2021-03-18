@@ -213,7 +213,7 @@ if __name__ == "__main__":
         )
         logger.info(f'📣 val metrics 📣 {valid_metrics}')
 
-        if valid_metrics['f1'] >= best_valid_f1:
+        if valid_metrics['f1'] > best_valid_f1:
             logger.info('\t--Found new best val f1')
             best_valid_f1 = valid_metrics['f1']
             save_checkpoint(
@@ -228,11 +228,11 @@ if __name__ == "__main__":
                 model_dir=args.model_dir,
             )
 
-        # early stopping when the best val f1 is greater than
+        # early stopping when the best val f1 is >=
         # the last args.early_stopping_patience val f1 scores
         if args.early_stopping_patience is not None and \
                 len(valid_f1s) > args.early_stopping_patience and \
-                all(best_valid_f1 > f1 for f1 in valid_f1s[-args.early_stopping_patience:]):
+                all(best_valid_f1 >= f1 for f1 in valid_f1s[-args.early_stopping_patience:]):
             logger.info('\t--STOPPING EARLY')
             break
 
