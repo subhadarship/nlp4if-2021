@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import json
 
 
-def read_log_file(log_file_path: str, plot: bool = False) -> dict:
+def read_log_file(log_file_path: str, plot: bool = False, verbose: bool = True) -> dict:
     """Read log file"""
     train_losses, val_losses = [], []
     num_epochs = 0
@@ -15,8 +15,9 @@ def read_log_file(log_file_path: str, plot: bool = False) -> dict:
         if "***RUN STARTED***" in line:
             start_ids.append(idx)
     assert len(start_ids) > 0
-    print(f'{log_file_path} contains {len(start_ids)} runs.\n'
-          f'Considering the latest run..')
+    if verbose:
+        print(f'{log_file_path} contains {len(start_ids)} runs.\n'
+              f'Considering the latest run..')
     lines = lines[start_ids[-1]:]
 
     for line in lines:
@@ -74,4 +75,4 @@ def read_log_file(log_file_path: str, plot: bool = False) -> dict:
 
 if __name__ == "__main__":
     _log_file_path = '../logs/bg/transformer_encoder/few150_hidden128_vocab16000.txt'  # log filename
-    print(read_log_file(log_file_path=_log_file_path, plot=True))
+    print(read_log_file(log_file_path=_log_file_path, plot=True, verbose=True))
