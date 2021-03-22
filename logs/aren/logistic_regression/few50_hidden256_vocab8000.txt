@@ -1,0 +1,159 @@
+03/21/2021 21:18:52 - INFO - __main__ -   
+
+*****************
+***RUN STARTED***
+*****************
+
+03/21/2021 21:18:52 - INFO - __main__ -   args
+-----------------------------------------------------------------------------------------
+	srclangs_with_num_samples: ar_all,en_50
+	trglang: en
+	train_data_dir: ../data/prepared
+	dev_data_dir: ../data/prepared
+	test_data_dir: None
+	batch_size: 4096
+	max_vocab_size: 8000
+	tokenization: tweet
+	hid_dim: 128
+	num_enc_layers: 3
+	num_enc_heads: 8
+	enc_pf_dim: 256
+	enc_dropout: 0.1
+	fc_dim: 64
+	bert_fc_dim: 64
+	logistic_regression_hid_dim: 256
+	logistic_regression_dropout: 0.1
+	log_file_path: ../logs/aren/logistic_regression/few50_hidden256_vocab8000.txt
+	random_seed: 123
+	lr: 0.0005
+	clip: 1.0
+	max_epochs: 999
+	model_dir: ../models/aren/logistic_regression/few50_hidden256_vocab8000
+	no_xavier_initialization: False
+	early_stopping_patience: 10
+	model_name: logistic_regression
+	freeze_bert: False
+-----------------------------------------------------------------------------------------
+
+03/21/2021 21:18:53 - INFO - __main__ -   device: cuda
+03/21/2021 21:18:53 - INFO - data_utils.load -   considered 165 (100.00 %) samples out of 165 total samples in ../data/prepared/train.ar.tsv
+03/21/2021 21:18:53 - INFO - data_utils.load -   considered 50 (13.33 %) samples out of 375 total samples in ../data/prepared/train.en.tsv
+03/21/2021 21:18:53 - INFO - data_utils.load -   considered 76 (100.00 %) samples out of 76 total samples in ../data/prepared/dev.en.tsv
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   tokenization: tweet
+03/21/2021 21:18:53 - INFO - data_utils.field -   3502 (100.00%) tokens out of 3502 tokens are kept in vocabulary
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   num train samples: 215
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   num val samples: 76
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   num test samples: None
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   train sentence max len: 112
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   val sentence max len: 88
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   train OOV: 0 (0.00%) out of 7765 running tokens are OOV
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   val OOV: 1047 (35.88%) out of 2918 running tokens are OOV
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   look at some train samples 👀
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   sample idx: 0, original text: وزائرتي كأن بها حياء فليس تزور إلا في الظلام فرشت لها المطارف والحشايا فعافتها وباتت في عظامي يضيق الجلد عن نفسي وعنها فتوسعه بأنواع السقام اذا ما فارقتني غسلتني كأنا عاكفان على حرام #المتنبي #الحمى #وباء #كورونا #الكويت #السعودية #قطر #الامارات #البحرين #عمان URL, preprocessed text: ['وزائرتي', 'كأن', 'بها', 'حياء', 'فليس', 'تزور', 'إلا', 'في', 'الظلام', 'فرشت', 'لها', 'المطارف', 'والحشايا', 'فعافتها', 'وباتت', 'في', 'عظامي', 'يضيق', 'الجلد', 'عن', 'نفسي', 'وعنها', 'فتوسعه', 'بأنواع', 'السقام', 'اذا', 'ما', 'فارقتني', 'غسلتني', 'كأنا', 'عاكفان', 'على', 'حرام', '#المتنبي', '#الحمى', '#وباء', '#كورونا', '#الكويت', '#السعودية', '#قطر', '#الامارات', '#البحرين', '#عمان', 'URL'], text ids: [917, 449, 117, 918, 919, 920, 105, 4, 921, 922, 303, 923, 924, 925, 926, 4, 927, 928, 929, 18, 930, 931, 932, 933, 934, 450, 63, 935, 936, 937, 938, 13, 939, 940, 941, 942, 7, 943, 40, 42, 944, 945, 946, 5], original labels: no nan nan nan nan no no, label ids: [[1], [2], [2], [2], [2], [1], [1]]
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   sample idx: 1, original text: بأمر خادم الحرمين الشريفين  منع التجول للحد  من انتشار #فيروس_كورونا  من الساعة 7م حتى الساعة 6ص  لمدة 21 يوم URL, preprocessed text: ['بأمر', 'خادم', 'الحرمين', 'الشريفين', 'منع', 'التجول', 'للحد', 'من', 'انتشار', '#فيروس_كورونا', 'من', 'الساعة', '7م', 'حتى', 'الساعة', '6ص', 'لمدة', '21', 'يوم', 'URL'], text ids: [947, 225, 226, 304, 305, 52, 53, 3, 33, 50, 3, 36, 948, 97, 36, 949, 89, 80, 69, 5], original labels: yes no yes no no no no, label ids: [[0], [1], [0], [1], [1], [1], [1]]
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   sample idx: 2, original text: الحيوانات تغزو المدن بعد تطبيق إجراءات حظر التجوال للوقاية من فيروس كورونا حول العالم، صور من ايطاليا و اليابان و جزيرة سردينيا .. URL, preprocessed text: ['الحيوانات', 'تغزو', 'المدن', 'بعد', 'تطبيق', 'إجراءات', 'حظر', 'التجوال', 'للوقاية', 'من', 'فيروس', 'كورونا', 'حول', 'العالم', '،', 'صور', 'من', 'ايطاليا', 'و', 'اليابان', 'و', 'جزيرة', 'سردينيا', '..', 'URL'], text ids: [451, 950, 951, 81, 452, 306, 118, 952, 307, 3, 24, 9, 227, 46, 6, 953, 3, 453, 47, 954, 47, 955, 956, 8, 5], original labels: yes yes nan yes yes yes yes, label ids: [[0], [0], [2], [0], [0], [0], [0]]
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   sample idx: 3, original text: تواجه قناتي: (يوسف علاونة مباشر) حملة شعواء من بهايم حلف اللطم وتضمن هذا دفع رشاوى لتعطيل الاشتراكات القديمة  برجاء تجديد الاشتراك وتفعيل الجرس  ونشر هذه التغريدة #كورونا #اوامر_ملكية #Covid_19 #قطر #ترك #مجوس #اخوان #احذية #روافض #خوارج #يوسف_علاونة  URL, preprocessed text: ['تواجه', 'قناتي', ':', '(', 'يوسف', 'علاونة', 'مباشر', ')', 'حملة', 'شعواء', 'من', 'بهايم', 'حلف', 'اللطم', 'وتضمن', 'هذا', 'دفع', 'رشاوى', 'لتعطيل', 'الاشتراكات', 'القديمة', 'برجاء', 'تجديد', 'الاشتراك', 'وتفعيل', 'الجرس', 'ونشر', 'هذه', 'التغريدة', '#كورونا', '#اوامر_ملكية', '#Covid_19', '#قطر', '#ترك', '#مجوس', '#اخوان', '#احذية', '#روافض', '#خوارج', '#يوسف_علاونة', 'URL'], text ids: [454, 957, 10, 14, 958, 959, 960, 15, 961, 962, 3, 963, 964, 965, 966, 70, 967, 968, 969, 970, 455, 971, 972, 973, 974, 975, 456, 64, 308, 7, 976, 135, 42, 977, 978, 979, 980, 981, 982, 983, 5], original labels: no nan nan nan nan no no, label ids: [[1], [2], [2], [2], [2], [1], [1]]
+03/21/2021 21:18:53 - INFO - data_utils.preprocess -   sample idx: 4, original text: إصابة عاملين بمشروعات كأس العالم في قطر بـ #كورونا #العربية_عاجل URL, preprocessed text: ['إصابة', 'عاملين', 'بمشروعات', 'كأس', 'العالم', 'في', 'قطر', 'بـ', '#كورونا', '#العربية_عاجل', 'URL'], text ids: [38, 984, 985, 986, 46, 4, 39, 228, 7, 457, 5], original labels: yes yes yes yes yes yes yes, label ids: [[0], [0], [0], [0], [0], [0], [0]]
+03/21/2021 21:18:55 - INFO - data_utils.preprocess -   there are nearly 4 batches in an epoch
+03/21/2021 21:18:55 - INFO - __main__ -   model
+-----------------------------------------------------------------------------------------
+MultitaskLogisticRegressionClassificationModel(
+  (emb): Embedding(3504, 256)
+  (dropout): Dropout(p=0.1)
+  (clfs): ModuleList(
+    (0): Linear(in_features=256, out_features=3, bias=True)
+    (1): Linear(in_features=256, out_features=3, bias=True)
+    (2): Linear(in_features=256, out_features=3, bias=True)
+    (3): Linear(in_features=256, out_features=3, bias=True)
+    (4): Linear(in_features=256, out_features=3, bias=True)
+    (5): Linear(in_features=256, out_features=3, bias=True)
+    (6): Linear(in_features=256, out_features=3, bias=True)
+  )
+)
+-----------------------------------------------------------------------------------------
+
+03/21/2021 21:18:55 - INFO - __main__ -   the model has 902,421 trainable parameters
+03/21/2021 21:18:55 - INFO - __main__ -   applying xavier initialization of model parameters
+03/21/2021 21:18:55 - INFO - __main__ -   🌋  starting training..
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - __main__ -   Epoch: 0001 | Time: 0m_0s | train_loss: 10.170 | val_loss: 7.842
+03/21/2021 21:18:55 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.4981203007518797, 'f1': 0.39497819185216276, 'precision': 0.39497819185216276, 'recall': 0.39497819185216276}
+03/21/2021 21:18:55 - INFO - __main__ -   	--Found new best val f1
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - __main__ -   Epoch: 0002 | Time: 0m_0s | train_loss: 7.205 | val_loss: 6.705
+03/21/2021 21:18:55 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5714285714285714, 'f1': 0.4655597991496437, 'precision': 0.4655597991496437, 'recall': 0.4655597991496437}
+03/21/2021 21:18:55 - INFO - __main__ -   	--Found new best val f1
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - __main__ -   Epoch: 0003 | Time: 0m_0s | train_loss: 5.641 | val_loss: 6.675
+03/21/2021 21:18:55 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5751879699248119, 'f1': 0.4498937826459892, 'precision': 0.4498937826459892, 'recall': 0.4498937826459892}
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   3 (0.99 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - __main__ -   Epoch: 0004 | Time: 0m_0s | train_loss: 4.217 | val_loss: 6.709
+03/21/2021 21:18:55 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5714285714285713, 'f1': 0.4579345617314, 'precision': 0.4579345617314, 'recall': 0.4579345617314}
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   23 (7.57 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - __main__ -   Epoch: 0005 | Time: 0m_0s | train_loss: 3.885 | val_loss: 6.687
+03/21/2021 21:18:55 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5451127819548872, 'f1': 0.45461908360532516, 'precision': 0.45461908360532516, 'recall': 0.45461908360532516}
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   16 (5.26 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - __main__ -   Epoch: 0006 | Time: 0m_0s | train_loss: 3.089 | val_loss: 6.480
+03/21/2021 21:18:55 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5582706766917294, 'f1': 0.4752234562834614, 'precision': 0.4752234562834614, 'recall': 0.4752234562834614}
+03/21/2021 21:18:55 - INFO - __main__ -   	--Found new best val f1
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:55 - INFO - training_utils.postprocess -   8 (2.63 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:55 - INFO - __main__ -   Epoch: 0007 | Time: 0m_0s | train_loss: 2.906 | val_loss: 6.251
+03/21/2021 21:18:55 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5714285714285714, 'f1': 0.5057545269227514, 'precision': 0.5057545269227514, 'recall': 0.5057545269227514}
+03/21/2021 21:18:55 - INFO - __main__ -   	--Found new best val f1
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   3 (0.99 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - __main__ -   Epoch: 0008 | Time: 0m_0s | train_loss: 2.285 | val_loss: 6.232
+03/21/2021 21:18:56 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5751879699248119, 'f1': 0.5139147465274014, 'precision': 0.5139147465274014, 'recall': 0.5139147465274014}
+03/21/2021 21:18:56 - INFO - __main__ -   	--Found new best val f1
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   3 (0.99 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - __main__ -   Epoch: 0009 | Time: 0m_0s | train_loss: 2.566 | val_loss: 6.282
+03/21/2021 21:18:56 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5751879699248119, 'f1': 0.5177842275353599, 'precision': 0.5177842275353599, 'recall': 0.5177842275353599}
+03/21/2021 21:18:56 - INFO - __main__ -   	--Found new best val f1
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   3 (0.99 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - __main__ -   Epoch: 0010 | Time: 0m_0s | train_loss: 1.261 | val_loss: 6.396
+03/21/2021 21:18:56 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5770676691729324, 'f1': 0.5232368485661932, 'precision': 0.5232368485661932, 'recall': 0.5232368485661932}
+03/21/2021 21:18:56 - INFO - __main__ -   	--Found new best val f1
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   10 (3.29 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - __main__ -   Epoch: 0011 | Time: 0m_0s | train_loss: 1.590 | val_loss: 6.534
+03/21/2021 21:18:56 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.569548872180451, 'f1': 0.5176739569917996, 'precision': 0.5176739569917996, 'recall': 0.5176739569917996}
+03/21/2021 21:18:56 - INFO - __main__ -   	--STOPPING EARLY
+03/21/2021 21:18:56 - INFO - __main__ -   load checkpoint from ../models/aren/logistic_regression/few50_hidden256_vocab8000
+03/21/2021 21:18:56 - INFO - __main__ -   load model weights from checkpoint in ../models/aren/logistic_regression/few50_hidden256_vocab8000
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing targets..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/21/2021 21:18:56 - INFO - training_utils.postprocess -   3 (0.99 %) out of 304 q2, q3, q4, q5 predictions are changed during postprocessing
+03/21/2021 21:18:56 - INFO - __main__ -   best_val_loss: 6.396
+03/21/2021 21:18:56 - INFO - __main__ -   📣 best validation metrics 📣 {'acc': 0.5770676691729324, 'f1': 0.5232368485661932, 'precision': 0.5232368485661932, 'recall': 0.5232368485661932}
