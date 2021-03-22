@@ -3,7 +3,7 @@
 cd ../src
 echo "WORKING DIR: $PWD"
 
-GPUID=1
+GPUID=0
 
 # English BERT
 
