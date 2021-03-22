@@ -3,11 +3,11 @@
 cd ../src
 echo "WORKING DIR: $PWD"
 
-GPUID=0
+GPUID=1
 
-# English BERT
+# Multilingual BERT
 
-MODELNAME=bert-base-uncased
+MODELNAME=bert-base-multilingual-cased
 
 MODELDIR=/mnt/backup/panda/nlp4if-2021/models
 
