@@ -422,3 +422,24 @@ MultitaskBertClassificationModel(
 03/22/2021 11:14:32 - INFO - __main__ -   Epoch: 0009 | Time: 0m_3s | train_loss: 6.437 | val_loss: 6.040
 03/22/2021 11:14:32 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5627705627705628, 'f1': 0.4726205807422936, 'precision': 0.4726205807422936, 'recall': 0.4726205807422936}
 03/22/2021 11:14:32 - INFO - __main__ -   	--Found new best val f1
+03/22/2021 11:14:56 - INFO - training_utils.train_loop -   postprocessing targets..
+03/22/2021 11:14:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 132 q2, q3, q4, q5 predictions are changed during postprocessing
+03/22/2021 11:14:56 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/22/2021 11:14:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 132 q2, q3, q4, q5 predictions are changed during postprocessing
+03/22/2021 11:14:56 - INFO - __main__ -   Epoch: 0010 | Time: 0m_3s | train_loss: 5.924 | val_loss: 6.517
+03/22/2021 11:14:56 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.43722943722943725, 'f1': 0.25203515227584034, 'precision': 0.25203515227584034, 'recall': 0.25203515227584034}
+03/22/2021 11:15:00 - INFO - training_utils.train_loop -   postprocessing targets..
+03/22/2021 11:15:00 - INFO - training_utils.postprocess -   0 (0.00 %) out of 132 q2, q3, q4, q5 predictions are changed during postprocessing
+03/22/2021 11:15:00 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/22/2021 11:15:00 - INFO - training_utils.postprocess -   0 (0.00 %) out of 132 q2, q3, q4, q5 predictions are changed during postprocessing
+03/22/2021 11:15:00 - INFO - __main__ -   Epoch: 0011 | Time: 0m_3s | train_loss: 5.910 | val_loss: 6.119
+03/22/2021 11:15:00 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5324675324675324, 'f1': 0.4267940668306733, 'precision': 0.4267940668306733, 'recall': 0.4267940668306733}
+03/22/2021 11:15:00 - INFO - __main__ -   	--STOPPING EARLY
+03/22/2021 11:15:00 - INFO - __main__ -   load checkpoint from /mnt/backup/panda/nlp4if-2021/models/bgar/bert-base-multilingual-cased/trg_fc256_lr0.005_trainable
+03/22/2021 11:15:01 - INFO - __main__ -   load model weights from checkpoint in /mnt/backup/panda/nlp4if-2021/models/bgar/bert-base-multilingual-cased/trg_fc256_lr0.005_trainable
+03/22/2021 11:15:01 - INFO - training_utils.train_loop -   postprocessing targets..
+03/22/2021 11:15:01 - INFO - training_utils.postprocess -   0 (0.00 %) out of 132 q2, q3, q4, q5 predictions are changed during postprocessing
+03/22/2021 11:15:01 - INFO - training_utils.train_loop -   postprocessing predictions..
+03/22/2021 11:15:01 - INFO - training_utils.postprocess -   0 (0.00 %) out of 132 q2, q3, q4, q5 predictions are changed during postprocessing
+03/22/2021 11:15:01 - INFO - __main__ -   best_val_loss: 6.040
+03/22/2021 11:15:01 - INFO - __main__ -   📣 best validation metrics 📣 {'acc': 0.5627705627705628, 'f1': 0.4726205807422936, 'precision': 0.4726205807422936, 'recall': 0.4726205807422936}
