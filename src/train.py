@@ -227,14 +227,18 @@ if __name__ == "__main__":
                 },
                 model_dir=args.model_dir,
             )
-
-        # early stopping when the best val f1 is >=
-        # the last args.early_stopping_patience val f1 scores
-        if args.early_stopping_patience is not None and \
-                len(valid_f1s) > args.early_stopping_patience and \
-                all(best_valid_f1 >= f1 for f1 in valid_f1s[-args.early_stopping_patience:]):
-            logger.info('\t--STOPPING EARLY')
-            break
+            # reset patience
+            patience = 0
+            logger.info(f'\tcurrent patience value: {patience}/{args.early_stopping_patience}')
+        elif len(valid_f1s) <= args.early_stopping_patience:
+            patience += 1
+            logger.info(f'\tcurrent patience value: {patience}/{args.early_stopping_patience}')
+        else:
+            patience += 1
+            logger.info(f'\tcurrent patience value: {patience}/{args.early_stopping_patience}')
+            if patience == args.early_stopping_patience:
+                logger.info('\t--STOPPING EARLY')
+                break
 
     """Evaluate"""
 
