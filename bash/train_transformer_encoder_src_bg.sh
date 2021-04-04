@@ -3,7 +3,7 @@
 cd ../src
 echo "WORKING DIR: $PWD"
 
-GPUID=0
+GPUID=1
 
 # transformer encoder
 MODELNAME=transformer_encoder
