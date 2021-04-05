@@ -1,0 +1,664 @@
+04/04/2021 23:36:58 - INFO - __main__ -   
+
+*****************
+***RUN STARTED***
+*****************
+
+04/04/2021 23:36:58 - INFO - __main__ -   args
+-----------------------------------------------------------------------------------------
+	srclangs_with_num_samples: ar_all
+	trglang: ar
+	train_data_dir: ../data/prepared
+	dev_data_dir: ../data/prepared
+	test_data_dir: None
+	batch_size: 1024
+	max_vocab_size: None
+	tokenization: bert-base-uncased
+	hid_dim: 128
+	num_enc_layers: 3
+	num_enc_heads: 8
+	enc_pf_dim: 256
+	enc_dropout: 0.1
+	fc_dim: 64
+	bert_fc_dim: 128
+	logistic_regression_hid_dim: 128
+	logistic_regression_dropout: 0.1
+	log_file_path: ../logs/enar/bert-base-uncased/trg_fc128_lr0.0005_frozen.txt
+	random_seed: 123
+	lr: 0.0005
+	clip: 1.0
+	max_epochs: 999
+	model_dir: /mnt/backup/panda/nlp4if-2021/models/enar/bert-base-uncased/trg_fc128_lr0.0005_frozen
+	no_xavier_initialization: False
+	early_stopping_patience: 10
+	model_name: bert-base-uncased
+	freeze_bert: True
+-----------------------------------------------------------------------------------------
+
+04/04/2021 23:36:58 - INFO - __main__ -   device: cuda
+04/04/2021 23:36:58 - INFO - data_utils.load -   considered 198 (100.00 %) samples out of 198 total samples in ../data/prepared/train.ar.tsv
+04/04/2021 23:36:58 - INFO - data_utils.load -   considered 20 (100.00 %) samples out of 20 total samples in ../data/prepared/dev.ar.tsv
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   tokenization: bert-base-uncased
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   num train samples: 198
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   num val samples: 20
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   num test samples: None
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   train sentence max len: 243
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   val sentence max len: 241
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   train OOV: 173 (0.55%) out of 31290 running tokens are OOV
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   val OOV: 6 (0.21%) out of 2902 running tokens are OOV
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   look at some train samples 👀
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   sample idx: 0, original text: #عاجل #خادم_الحرمين_الشريفين يصدر أمره بمنع التجول للحد من انتشار #فيروس_كورونا الجديد ابتداءً من الساعة الـ 7 مساءً وحتى الساعة الـ 6 صباحًا لمدة ( 21 ) يومًا من مساء يوم الأثنين 28 رجب 1441هـ، الموافق 23 مارس 2020م. #واس URL, text ids: [101, 1001, 1288, 25573, 29819, 23673, 1001, 1277, 25573, 15394, 22192, 1035, 1270, 23673, 29820, 17149, 22192, 14498, 15915, 1035, 1270, 23673, 29825, 17149, 14498, 29833, 14498, 15915, 1300, 29826, 15394, 17149, 1270, 22192, 17149, 14157, 1271, 22192, 15915, 29830, 1270, 23673, 29817, 29819, 29836, 23673, 1294, 23673, 29820, 15394, 1295, 15915, 1270, 15915, 29817, 29825, 25573, 17149, 1001, 1291, 14498, 17149, 29836, 29824, 1035, 1293, 29836, 17149, 29836, 15915, 25573, 1270, 23673, 29819, 15394, 14498, 15394, 1270, 29816, 29817, 15394, 25573, 29815, 1295, 15915, 1270, 23673, 29824, 25573, 29830, 19433, 1270, 23673, 29832, 1021, 1295, 29824, 25573, 29815, 1298, 29820, 29817, 29837, 1270, 23673, 29824, 25573, 29830, 19433, 1270, 23673, 29832, 1020, 1284, 29816, 25573, 29820, 25573, 1294, 22192, 15394, 19433, 1006, 2538, 1007, 1300, 29836, 22192, 25573, 1295, 15915, 1295, 29824, 25573, 29815, 1300, 29836, 22192, 1270, 23673, 25573, 29818, 15915, 14498, 15915, 2654, 1280, 29819, 29816, 14748, 2487, 14157, 29832, 1268, 1270, 23673, 22192, 29836, 25573, 29833, 29834, 2603, 1295, 25573, 17149, 29824, 12609, 22192, 1012, 1001, 1298, 25573, 29824, 24471, 2140, 102], original labels: yes no yes no no no no, label ids: [[0], [1], [0], [1], [1], [1], [1]]
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   sample idx: 1, original text: بعد كل الإجراءات الاحترازية التي تقوم بها #المملكة للحد من انتشار #كورونا . . . هل تؤيد فرض #حظر_تجول في #السعودية من الساعة (٧م) إلى الساعة (٧ص) ابتداء من يوم غدٍ الاحد . . - نعم أُوَيد ( #ريتويت ) ، ولماذا ؟ - لا أُوَيد ( #إعجاب ) ، ولماذا ؟ . .  #انا_مع_حظر_التجول_الاجباري URL, text ids: [101, 1271, 29830, 15394, 1293, 23673, 1270, 23673, 25573, 29819, 17149, 25573, 29815, 25573, 29817, 1270, 23673, 25573, 29820, 29817, 17149, 25573, 29823, 14498, 19433, 1270, 23673, 29817, 14498, 1273, 29834, 29836, 22192, 1271, 14157, 25573, 1001, 1270, 23673, 22192, 22192, 23673, 29835, 19433, 1294, 23673, 29820, 15394, 1295, 15915, 1270, 15915, 29817, 29825, 25573, 17149, 1001, 1293, 29836, 17149, 29836, 15915, 25573, 1012, 1012, 1012, 1297, 23673, 1273, 29836, 14498, 15394, 1291, 17149, 29827, 1001, 1276, 29829, 17149, 1035, 1273, 29819, 29836, 23673, 1291, 14498, 1001, 1270, 23673, 29824, 29830, 29836, 15394, 14498, 19433, 1295, 15915, 1270, 23673, 29824, 25573, 29830, 19433, 1006, 100, 1007, 1270, 23673, 29837, 1270, 23673, 29824, 25573, 29830, 19433, 1006, 100, 1007, 1270, 29816, 29817, 15394, 25573, 29815, 1295, 15915, 1300, 29836, 22192, 1289, 15394, 1270, 23673, 25573, 29820, 15394, 1012, 1012, 1011, 1296, 29830, 22192, 1270, 29836, 14498, 15394, 1006, 1001, 1280, 14498, 29817, 29836, 14498, 29817, 1007, 1268, 1298, 23673, 22192, 25573, 29822, 25573, 100, 1011, 1294, 25573, 1270, 29836, 14498, 15394, 1006, 1001, 1270, 29830, 29819, 25573, 29816, 1007, 1268, 1298, 23673, 22192, 25573, 29822, 25573, 100, 1012, 1012, 1001, 1270, 15915, 25573, 1035, 1295, 29830, 1035, 1276, 29829, 17149, 1035, 1270, 23673, 29817, 29819, 29836, 23673, 1035, 1270, 23673, 25573, 29819, 29816, 25573, 17149, 14498, 24471, 2140, 102], original labels: no nan nan nan nan no no, label ids: [[1], [2], [2], [2], [2], [1], [1]]
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   sample idx: 2, original text: تصويت 🔴 .  . هل تعتقد أن ( حظر التجول ) الذي تُطبقه بعض الدول يمنع انتشار فيروس كورونا .. ولماذا ؟. .  . نعم = رتويت  . لا = مفضلة, text ids: [101, 1273, 29826, 29836, 14498, 29817, 100, 1012, 1012, 1297, 23673, 1273, 29830, 29817, 29834, 15394, 1270, 15915, 1006, 1276, 29829, 17149, 1270, 23673, 29817, 29819, 29836, 23673, 1007, 1270, 23673, 29822, 14498, 1273, 29828, 29816, 29834, 14157, 1271, 29830, 29827, 1270, 23673, 15394, 29836, 23673, 1300, 22192, 15915, 29830, 1270, 15915, 29817, 29825, 25573, 17149, 1291, 14498, 17149, 29836, 29824, 1293, 29836, 17149, 29836, 15915, 25573, 1012, 1012, 1298, 23673, 22192, 25573, 29822, 25573, 100, 1012, 1012, 1012, 1296, 29830, 22192, 1027, 1280, 29817, 29836, 14498, 29817, 1012, 1294, 25573, 1027, 1295, 29833, 29827, 23673, 19433, 102], original labels: no nan nan nan nan no no, label ids: [[1], [2], [2], [2], [2], [1], [1]]
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   sample idx: 3, original text: ما هو دي دعواتنا, text ids: [101, 1295, 25573, 1297, 29836, 1278, 14498, 1278, 29830, 29836, 25573, 29817, 15915, 25573, 102], original labels: no nan nan nan nan no no, label ids: [[1], [2], [2], [2], [2], [1], [1]]
+04/04/2021 23:36:58 - INFO - data_utils.preprocess_bert -   sample idx: 4, original text: #الصحة تعلن عن تسجيل (١١٩) حالة إصابة جديدة بفيروس #كورونا الجديد (كوفيد١٩). URL, text ids: [101, 1001, 1270, 23673, 29826, 29820, 19433, 1273, 29830, 23673, 15915, 1288, 15915, 1273, 29824, 29819, 14498, 23673, 1006, 100, 1007, 1276, 25573, 23673, 19433, 1270, 29826, 25573, 29816, 19433, 1275, 15394, 14498, 15394, 19433, 1271, 29833, 14498, 17149, 29836, 29824, 1001, 1293, 29836, 17149, 29836, 15915, 25573, 1270, 23673, 29819, 15394, 14498, 15394, 1006, 100, 1007, 1012, 24471, 2140, 102], original labels: yes no yes no no no no, label ids: [[0], [1], [0], [1], [1], [1], [1]]
+04/04/2021 23:37:00 - INFO - data_utils.preprocess_bert -   there are nearly 37 batches in an epoch
+04/04/2021 23:37:02 - INFO - __main__ -   model
+-----------------------------------------------------------------------------------------
+MultitaskBertClassificationModel(
+  (encoder): BERT(
+    (bert): BertModel(
+      (embeddings): BertEmbeddings(
+        (word_embeddings): Embedding(30522, 768, padding_idx=0)
+        (position_embeddings): Embedding(512, 768)
+        (token_type_embeddings): Embedding(2, 768)
+        (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+        (dropout): Dropout(p=0.1)
+      )
+      (encoder): BertEncoder(
+        (layer): ModuleList(
+          (0): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (1): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (2): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (3): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (4): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (5): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (6): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (7): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (8): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (9): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (10): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (11): BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm(torch.Size([768]), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1)
+            )
+          )
+        )
+      )
+      (pooler): BertPooler(
+        (dense): Linear(in_features=768, out_features=768, bias=True)
+        (activation): Tanh()
+      )
+    )
+  )
+  (fc): Linear(in_features=768, out_features=128, bias=True)
+  (clfs): ModuleList(
+    (0): Linear(in_features=128, out_features=3, bias=True)
+    (1): Linear(in_features=128, out_features=3, bias=True)
+    (2): Linear(in_features=128, out_features=3, bias=True)
+    (3): Linear(in_features=128, out_features=3, bias=True)
+    (4): Linear(in_features=128, out_features=3, bias=True)
+    (5): Linear(in_features=128, out_features=3, bias=True)
+    (6): Linear(in_features=128, out_features=3, bias=True)
+  )
+)
+-----------------------------------------------------------------------------------------
+
+04/04/2021 23:37:02 - INFO - __main__ -   the model has 101,141 trainable parameters
+04/04/2021 23:37:02 - INFO - __main__ -   🌋  starting training..
+04/04/2021 23:37:04 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:04 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:04 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:04 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:04 - INFO - __main__ -   Epoch: 0001 | Time: 0m_2s | train_loss: 6.379 | val_loss: 5.721
+04/04/2021 23:37:04 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6357142857142858, 'f1': 0.6005363252311208, 'precision': 0.6005363252311208, 'recall': 0.6005363252311208}
+04/04/2021 23:37:04 - INFO - __main__ -   	--Found new best val f1
+04/04/2021 23:37:05 - INFO - __main__ -   	current patience value: 0/10
+04/04/2021 23:37:07 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:07 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:07 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:07 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:07 - INFO - __main__ -   Epoch: 0002 | Time: 0m_2s | train_loss: 5.970 | val_loss: 5.843
+04/04/2021 23:37:07 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5714285714285714, 'f1': 0.4851110708253565, 'precision': 0.4851110708253565, 'recall': 0.4851110708253565}
+04/04/2021 23:37:07 - INFO - __main__ -   	current patience value: 1/10
+04/04/2021 23:37:09 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:09 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:09 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:09 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:09 - INFO - __main__ -   Epoch: 0003 | Time: 0m_2s | train_loss: 5.873 | val_loss: 5.649
+04/04/2021 23:37:09 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6428571428571429, 'f1': 0.5711120263915295, 'precision': 0.5711120263915295, 'recall': 0.5711120263915295}
+04/04/2021 23:37:09 - INFO - __main__ -   	current patience value: 2/10
+04/04/2021 23:37:11 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:11 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:11 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:11 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:11 - INFO - __main__ -   Epoch: 0004 | Time: 0m_2s | train_loss: 5.830 | val_loss: 5.845
+04/04/2021 23:37:11 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5785714285714285, 'f1': 0.5135590831305118, 'precision': 0.5135590831305118, 'recall': 0.5135590831305118}
+04/04/2021 23:37:11 - INFO - __main__ -   	current patience value: 3/10
+04/04/2021 23:37:13 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:13 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:13 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:13 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:13 - INFO - __main__ -   Epoch: 0005 | Time: 0m_2s | train_loss: 5.794 | val_loss: 5.667
+04/04/2021 23:37:13 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6357142857142858, 'f1': 0.5616200690734852, 'precision': 0.5616200690734852, 'recall': 0.5616200690734852}
+04/04/2021 23:37:13 - INFO - __main__ -   	current patience value: 4/10
+04/04/2021 23:37:16 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:16 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:16 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:16 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:16 - INFO - __main__ -   Epoch: 0006 | Time: 0m_2s | train_loss: 5.720 | val_loss: 5.622
+04/04/2021 23:37:16 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.65, 'f1': 0.6035248309782472, 'precision': 0.6035248309782472, 'recall': 0.6035248309782472}
+04/04/2021 23:37:16 - INFO - __main__ -   	--Found new best val f1
+04/04/2021 23:37:21 - INFO - __main__ -   	current patience value: 0/10
+04/04/2021 23:37:23 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:23 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:23 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:23 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:23 - INFO - __main__ -   Epoch: 0007 | Time: 0m_2s | train_loss: 5.770 | val_loss: 5.904
+04/04/2021 23:37:23 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5642857142857143, 'f1': 0.4652948369339347, 'precision': 0.4652948369339347, 'recall': 0.4652948369339347}
+04/04/2021 23:37:23 - INFO - __main__ -   	current patience value: 1/10
+04/04/2021 23:37:25 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:25 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:25 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:25 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:25 - INFO - __main__ -   Epoch: 0008 | Time: 0m_2s | train_loss: 5.688 | val_loss: 5.523
+04/04/2021 23:37:25 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.65, 'f1': 0.6011805086339247, 'precision': 0.6011805086339247, 'recall': 0.6011805086339247}
+04/04/2021 23:37:25 - INFO - __main__ -   	current patience value: 2/10
+04/04/2021 23:37:27 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:27 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:27 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:27 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:27 - INFO - __main__ -   Epoch: 0009 | Time: 0m_2s | train_loss: 5.633 | val_loss: 5.496
+04/04/2021 23:37:27 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6428571428571429, 'f1': 0.5669093059803691, 'precision': 0.5669093059803691, 'recall': 0.5669093059803691}
+04/04/2021 23:37:27 - INFO - __main__ -   	current patience value: 3/10
+04/04/2021 23:37:29 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:29 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:29 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:29 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:29 - INFO - __main__ -   Epoch: 0010 | Time: 0m_2s | train_loss: 5.666 | val_loss: 5.406
+04/04/2021 23:37:29 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6571428571428571, 'f1': 0.6111461942840777, 'precision': 0.6111461942840777, 'recall': 0.6111461942840777}
+04/04/2021 23:37:29 - INFO - __main__ -   	--Found new best val f1
+04/04/2021 23:37:34 - INFO - __main__ -   	current patience value: 0/10
+04/04/2021 23:37:36 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:36 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:36 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:36 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:36 - INFO - __main__ -   Epoch: 0011 | Time: 0m_2s | train_loss: 5.613 | val_loss: 5.661
+04/04/2021 23:37:36 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5857142857142856, 'f1': 0.5340335334921801, 'precision': 0.5340335334921801, 'recall': 0.5340335334921801}
+04/04/2021 23:37:36 - INFO - __main__ -   	current patience value: 1/10
+04/04/2021 23:37:38 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:38 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:38 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:38 - INFO - training_utils.postprocess -   2 (2.50 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:38 - INFO - __main__ -   Epoch: 0012 | Time: 0m_2s | train_loss: 5.477 | val_loss: 5.478
+04/04/2021 23:37:38 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6285714285714287, 'f1': 0.5809089087726858, 'precision': 0.5809089087726858, 'recall': 0.5809089087726858}
+04/04/2021 23:37:38 - INFO - __main__ -   	current patience value: 2/10
+04/04/2021 23:37:41 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:41 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:41 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:41 - INFO - training_utils.postprocess -   1 (1.25 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:41 - INFO - __main__ -   Epoch: 0013 | Time: 0m_2s | train_loss: 5.618 | val_loss: 5.593
+04/04/2021 23:37:41 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5928571428571429, 'f1': 0.5433733165161737, 'precision': 0.5433733165161737, 'recall': 0.5433733165161737}
+04/04/2021 23:37:41 - INFO - __main__ -   	current patience value: 3/10
+04/04/2021 23:37:43 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:43 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:43 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:43 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:43 - INFO - __main__ -   Epoch: 0014 | Time: 0m_2s | train_loss: 5.547 | val_loss: 5.351
+04/04/2021 23:37:43 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6571428571428571, 'f1': 0.6081879939022796, 'precision': 0.6081879939022796, 'recall': 0.6081879939022796}
+04/04/2021 23:37:43 - INFO - __main__ -   	current patience value: 4/10
+04/04/2021 23:37:45 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:45 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:45 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:45 - INFO - training_utils.postprocess -   3 (3.75 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:45 - INFO - __main__ -   Epoch: 0015 | Time: 0m_2s | train_loss: 5.427 | val_loss: 5.609
+04/04/2021 23:37:45 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5571428571428572, 'f1': 0.5195472285650857, 'precision': 0.5195472285650857, 'recall': 0.5195472285650857}
+04/04/2021 23:37:45 - INFO - __main__ -   	current patience value: 5/10
+04/04/2021 23:37:47 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:47 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:47 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:47 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:47 - INFO - __main__ -   Epoch: 0016 | Time: 0m_2s | train_loss: 5.471 | val_loss: 5.552
+04/04/2021 23:37:47 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6642857142857144, 'f1': 0.5952832083778131, 'precision': 0.5952832083778131, 'recall': 0.5952832083778131}
+04/04/2021 23:37:47 - INFO - __main__ -   	current patience value: 6/10
+04/04/2021 23:37:49 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:49 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:49 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:49 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:49 - INFO - __main__ -   Epoch: 0017 | Time: 0m_2s | train_loss: 5.414 | val_loss: 5.321
+04/04/2021 23:37:49 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6785714285714286, 'f1': 0.6696490048335134, 'precision': 0.6696490048335134, 'recall': 0.6696490048335134}
+04/04/2021 23:37:49 - INFO - __main__ -   	--Found new best val f1
+04/04/2021 23:37:54 - INFO - __main__ -   	current patience value: 0/10
+04/04/2021 23:37:56 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:56 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:56 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:56 - INFO - __main__ -   Epoch: 0018 | Time: 0m_2s | train_loss: 5.325 | val_loss: 5.385
+04/04/2021 23:37:56 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6642857142857144, 'f1': 0.6133457662463747, 'precision': 0.6133457662463747, 'recall': 0.6133457662463747}
+04/04/2021 23:37:56 - INFO - __main__ -   	current patience value: 1/10
+04/04/2021 23:37:59 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:37:59 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:59 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:37:59 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:37:59 - INFO - __main__ -   Epoch: 0019 | Time: 0m_2s | train_loss: 5.162 | val_loss: 5.432
+04/04/2021 23:37:59 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6928571428571428, 'f1': 0.6466600762593006, 'precision': 0.6466600762593006, 'recall': 0.6466600762593006}
+04/04/2021 23:37:59 - INFO - __main__ -   	current patience value: 2/10
+04/04/2021 23:38:01 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:01 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:01 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:01 - INFO - training_utils.postprocess -   2 (2.50 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:01 - INFO - __main__ -   Epoch: 0020 | Time: 0m_2s | train_loss: 5.236 | val_loss: 5.356
+04/04/2021 23:38:01 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6357142857142859, 'f1': 0.5803131509013861, 'precision': 0.5803131509013861, 'recall': 0.5803131509013861}
+04/04/2021 23:38:01 - INFO - __main__ -   	current patience value: 3/10
+04/04/2021 23:38:03 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:03 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:03 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:03 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:03 - INFO - __main__ -   Epoch: 0021 | Time: 0m_2s | train_loss: 5.414 | val_loss: 5.135
+04/04/2021 23:38:03 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6357142857142858, 'f1': 0.6407167026521865, 'precision': 0.6407167026521865, 'recall': 0.6407167026521865}
+04/04/2021 23:38:03 - INFO - __main__ -   	current patience value: 4/10
+04/04/2021 23:38:05 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:05 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:05 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:05 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:05 - INFO - __main__ -   Epoch: 0022 | Time: 0m_2s | train_loss: 5.490 | val_loss: 5.211
+04/04/2021 23:38:05 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7, 'f1': 0.6697441803170888, 'precision': 0.6697441803170888, 'recall': 0.6697441803170888}
+04/04/2021 23:38:05 - INFO - __main__ -   	--Found new best val f1
+04/04/2021 23:38:10 - INFO - __main__ -   	current patience value: 0/10
+04/04/2021 23:38:12 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:12 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:12 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:12 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:12 - INFO - __main__ -   Epoch: 0023 | Time: 0m_2s | train_loss: 5.229 | val_loss: 5.110
+04/04/2021 23:38:12 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7000000000000001, 'f1': 0.6904739676743402, 'precision': 0.6904739676743402, 'recall': 0.6904739676743402}
+04/04/2021 23:38:12 - INFO - __main__ -   	--Found new best val f1
+04/04/2021 23:38:17 - INFO - __main__ -   	current patience value: 0/10
+04/04/2021 23:38:19 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:19 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:19 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:19 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:19 - INFO - __main__ -   Epoch: 0024 | Time: 0m_2s | train_loss: 5.203 | val_loss: 5.255
+04/04/2021 23:38:19 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6714285714285715, 'f1': 0.6336540019884779, 'precision': 0.6336540019884779, 'recall': 0.6336540019884779}
+04/04/2021 23:38:19 - INFO - __main__ -   	current patience value: 1/10
+04/04/2021 23:38:21 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:21 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:21 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:21 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:21 - INFO - __main__ -   Epoch: 0025 | Time: 0m_2s | train_loss: 5.102 | val_loss: 5.060
+04/04/2021 23:38:21 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6928571428571428, 'f1': 0.6835623104655967, 'precision': 0.6835623104655967, 'recall': 0.6835623104655967}
+04/04/2021 23:38:21 - INFO - __main__ -   	current patience value: 2/10
+04/04/2021 23:38:24 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:24 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:24 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:24 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:24 - INFO - __main__ -   Epoch: 0026 | Time: 0m_2s | train_loss: 5.254 | val_loss: 5.106
+04/04/2021 23:38:24 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.692857142857143, 'f1': 0.6900738746677123, 'precision': 0.6900738746677123, 'recall': 0.6900738746677123}
+04/04/2021 23:38:24 - INFO - __main__ -   	current patience value: 3/10
+04/04/2021 23:38:26 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:26 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:26 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:26 - INFO - training_utils.postprocess -   3 (3.75 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:26 - INFO - __main__ -   Epoch: 0027 | Time: 0m_2s | train_loss: 5.193 | val_loss: 5.736
+04/04/2021 23:38:26 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.5714285714285714, 'f1': 0.5116478008207331, 'precision': 0.5116478008207331, 'recall': 0.5116478008207331}
+04/04/2021 23:38:26 - INFO - __main__ -   	current patience value: 4/10
+04/04/2021 23:38:28 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:28 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:28 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:28 - INFO - training_utils.postprocess -   2 (2.50 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:28 - INFO - __main__ -   Epoch: 0028 | Time: 0m_2s | train_loss: 5.061 | val_loss: 5.310
+04/04/2021 23:38:28 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6642857142857143, 'f1': 0.6458715887287317, 'precision': 0.6458715887287317, 'recall': 0.6458715887287317}
+04/04/2021 23:38:28 - INFO - __main__ -   	current patience value: 5/10
+04/04/2021 23:38:30 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:30 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:30 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:30 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:30 - INFO - __main__ -   Epoch: 0029 | Time: 0m_2s | train_loss: 5.061 | val_loss: 5.240
+04/04/2021 23:38:30 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7071428571428571, 'f1': 0.6746127924608799, 'precision': 0.6746127924608799, 'recall': 0.6746127924608799}
+04/04/2021 23:38:30 - INFO - __main__ -   	current patience value: 6/10
+04/04/2021 23:38:32 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:32 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:32 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:32 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:32 - INFO - __main__ -   Epoch: 0030 | Time: 0m_2s | train_loss: 5.127 | val_loss: 5.070
+04/04/2021 23:38:32 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7214285714285713, 'f1': 0.7184590068249185, 'precision': 0.7184590068249185, 'recall': 0.7184590068249185}
+04/04/2021 23:38:32 - INFO - __main__ -   	--Found new best val f1
+04/04/2021 23:38:37 - INFO - __main__ -   	current patience value: 0/10
+04/04/2021 23:38:39 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:39 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:39 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:39 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:39 - INFO - __main__ -   Epoch: 0031 | Time: 0m_2s | train_loss: 5.094 | val_loss: 5.486
+04/04/2021 23:38:39 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6714285714285714, 'f1': 0.6118984881232781, 'precision': 0.6118984881232781, 'recall': 0.6118984881232781}
+04/04/2021 23:38:39 - INFO - __main__ -   	current patience value: 1/10
+04/04/2021 23:38:42 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:42 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:42 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:42 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:42 - INFO - __main__ -   Epoch: 0032 | Time: 0m_2s | train_loss: 5.138 | val_loss: 5.356
+04/04/2021 23:38:42 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7214285714285715, 'f1': 0.6930339061458606, 'precision': 0.6930339061458606, 'recall': 0.6930339061458606}
+04/04/2021 23:38:42 - INFO - __main__ -   	current patience value: 2/10
+04/04/2021 23:38:44 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:44 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:44 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:44 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:44 - INFO - __main__ -   Epoch: 0033 | Time: 0m_2s | train_loss: 4.893 | val_loss: 5.254
+04/04/2021 23:38:44 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7000000000000001, 'f1': 0.6739205510267781, 'precision': 0.6739205510267781, 'recall': 0.6739205510267781}
+04/04/2021 23:38:44 - INFO - __main__ -   	current patience value: 3/10
+04/04/2021 23:38:46 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:46 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:46 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:46 - INFO - training_utils.postprocess -   3 (3.75 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:46 - INFO - __main__ -   Epoch: 0034 | Time: 0m_2s | train_loss: 4.981 | val_loss: 5.600
+04/04/2021 23:38:46 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6714285714285714, 'f1': 0.6114518335678777, 'precision': 0.6114518335678777, 'recall': 0.6114518335678777}
+04/04/2021 23:38:46 - INFO - __main__ -   	current patience value: 4/10
+04/04/2021 23:38:48 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:48 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:48 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:48 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:48 - INFO - __main__ -   Epoch: 0035 | Time: 0m_2s | train_loss: 4.713 | val_loss: 5.259
+04/04/2021 23:38:48 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7071428571428572, 'f1': 0.6891828759055539, 'precision': 0.6891828759055539, 'recall': 0.6891828759055539}
+04/04/2021 23:38:48 - INFO - __main__ -   	current patience value: 5/10
+04/04/2021 23:38:50 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:50 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:50 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:50 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:50 - INFO - __main__ -   Epoch: 0036 | Time: 0m_2s | train_loss: 4.946 | val_loss: 5.028
+04/04/2021 23:38:50 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6857142857142856, 'f1': 0.6915939227964442, 'precision': 0.6915939227964442, 'recall': 0.6915939227964442}
+04/04/2021 23:38:50 - INFO - __main__ -   	current patience value: 6/10
+04/04/2021 23:38:53 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:53 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:53 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:53 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:53 - INFO - __main__ -   Epoch: 0037 | Time: 0m_2s | train_loss: 4.867 | val_loss: 5.413
+04/04/2021 23:38:53 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7071428571428571, 'f1': 0.6579264307170468, 'precision': 0.6579264307170468, 'recall': 0.6579264307170468}
+04/04/2021 23:38:53 - INFO - __main__ -   	current patience value: 7/10
+04/04/2021 23:38:55 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:55 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:55 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:55 - INFO - __main__ -   Epoch: 0038 | Time: 0m_2s | train_loss: 4.715 | val_loss: 5.214
+04/04/2021 23:38:55 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7214285714285714, 'f1': 0.6889338127374284, 'precision': 0.6889338127374284, 'recall': 0.6889338127374284}
+04/04/2021 23:38:55 - INFO - __main__ -   	current patience value: 8/10
+04/04/2021 23:38:57 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:57 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:57 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:57 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:57 - INFO - __main__ -   Epoch: 0039 | Time: 0m_2s | train_loss: 4.881 | val_loss: 5.002
+04/04/2021 23:38:57 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.7071428571428571, 'f1': 0.7005399784914494, 'precision': 0.7005399784914494, 'recall': 0.7005399784914494}
+04/04/2021 23:38:57 - INFO - __main__ -   	current patience value: 9/10
+04/04/2021 23:38:59 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:38:59 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:59 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:38:59 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:38:59 - INFO - __main__ -   Epoch: 0040 | Time: 0m_2s | train_loss: 4.947 | val_loss: 5.155
+04/04/2021 23:38:59 - INFO - __main__ -   📣 val metrics 📣 {'acc': 0.6071428571428571, 'f1': 0.6234756017791732, 'precision': 0.6234756017791732, 'recall': 0.6234756017791732}
+04/04/2021 23:38:59 - INFO - __main__ -   	current patience value: 10/10
+04/04/2021 23:38:59 - INFO - __main__ -   	--STOPPING EARLY
+04/04/2021 23:38:59 - INFO - __main__ -   load checkpoint from /mnt/backup/panda/nlp4if-2021/models/enar/bert-base-uncased/trg_fc128_lr0.0005_frozen
+04/04/2021 23:38:59 - INFO - __main__ -   load model weights from checkpoint in /mnt/backup/panda/nlp4if-2021/models/enar/bert-base-uncased/trg_fc128_lr0.0005_frozen
+04/04/2021 23:39:00 - INFO - training_utils.train_loop -   postprocessing targets..
+04/04/2021 23:39:00 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:39:00 - INFO - training_utils.train_loop -   postprocessing predictions..
+04/04/2021 23:39:00 - INFO - training_utils.postprocess -   0 (0.00 %) out of 80 q2, q3, q4, q5 predictions are changed during postprocessing
+04/04/2021 23:39:00 - INFO - __main__ -   best_val_loss: 5.070
+04/04/2021 23:39:00 - INFO - __main__ -   📣 best validation metrics 📣 {'acc': 0.7214285714285713, 'f1': 0.7184590068249185, 'precision': 0.7184590068249185, 'recall': 0.7184590068249185}
