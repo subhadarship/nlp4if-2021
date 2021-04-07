@@ -27,6 +27,6 @@ def sanitize(inp_fpath: str, out_fpath: str) -> None:
 
 
 if __name__ == "__main__":
-    if sys.argv != 3:
+    if len(sys.argv) != 3:
         raise AssertionError(f'Usage: python sanitize_predictions.py inp.tsv out.tsv')
     sanitize(sys.argv[1], sys.argv[2])
