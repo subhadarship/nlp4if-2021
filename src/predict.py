@@ -232,6 +232,6 @@ if __name__ == "__main__":
             logger.info(f'writing test predictions to {args.test_pred_path}..')
             test_predictions_df = pd.DataFrame(test_predictions)
             test_predictions_df.to_csv(
-                args.test_predictions_df,
+                args.test_pred_path,
                 sep='\t', encoding='utf-8', index=False, header=False
             )
