@@ -110,7 +110,7 @@ if __name__ == "__main__":
         data_dfs_dict['test'].rename(columns={'text': 'tweet_text'}, inplace=True)
         # add dummy labels
         for idx in range(7):
-            data_dfs_dict[f'q{idx + 1}_label'] = ['yes'] * len(data_dfs_dict['test'])
+            data_dfs_dict['test'][f'q{idx + 1}_label'] = ['yes'] * len(data_dfs_dict['test'])
 
     """Load checkpoint"""
     # load checkpoint
