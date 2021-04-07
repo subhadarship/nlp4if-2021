@@ -20,7 +20,7 @@ def get_train_args():
     parser.add_argument('--max_epochs', type=int, default=2)
     parser.add_argument('--model_dir', type=str, default='../models/tmp')
     parser.add_argument('--no_xavier_initialization', action='store_true', default=False)
-    parser.add_argument('--early_stopping_patience', type=int, default=None)
+    parser.add_argument('--early_stopping_patience', type=int, default=10)
     parser.add_argument('--model_name', type=str, default='transformer_enc')
     parser.add_argument('--freeze_bert', action='store_true', default=False,
                         help='whether to freeze the parameters of BERT '
