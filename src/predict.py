@@ -117,7 +117,7 @@ if __name__ == "__main__":
     # load checkpoint
     logger.info(f'load checkpoint from {args.model_dir}')
     checkpoint_dict = load_checkpoint(args.model_dir, device)
-    TEXT = checkpoint_dict['data_dict']['TEXT']
+    TEXT = checkpoint_dict['data_dict']['TEXT'] if 'TEXT' in checkpoint_dict['data_dict'] else None
     LABELS = checkpoint_dict['data_dict']['LABELS']
 
     """Preprocess data"""
