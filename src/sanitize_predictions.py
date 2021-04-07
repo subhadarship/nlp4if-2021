@@ -15,6 +15,7 @@ def sanitize(inp_fpath: str, out_fpath: str) -> None:
         for label in col:
             assert label in ['yes', 'no', 'nan']
             if label == 'nan':
+                # change nan to no
                 sanitized_col.append('no')
                 num_changed += 1
             else:
