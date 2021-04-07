@@ -7,7 +7,7 @@ import pandas as pd
 def sanitize(inp_fpath: str, out_fpath: str) -> None:
     """Sanitize predictions in input file and write to output file"""
     assert os.path.isfile(inp_fpath)
-    df = pd.read_csv(inp_fpath, sep='\t', encoding='utf-8', na_filter=False, header=False)
+    df = pd.read_csv(inp_fpath, sep='\t', encoding='utf-8', na_filter=False, header=None)
     for col_idx in [0, 5, 6]:
         col = df[col_idx].to_list()
         sanitized_col = []
