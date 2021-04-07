@@ -26,8 +26,8 @@ def split_data(inp_fpath, dev_fraction: float, out_train_fpath: str, out_dev_fpa
 
 
 if __name__ == "__main__":
-    DATA_PATH_ENGLISH = os.path.join('../data/data_english_v1/v1/covid19_disinfo_binary_english_train.tsv')
-    DATA_PATH_ARABIC = os.path.join('../data/data_arabic_v1/v1/covid19_disinfo_binary_arabic_train.tsv')
+    DATA_PATH_ENGLISH = os.path.join('../data/english/v1/v1/covid19_disinfo_binary_english_train.tsv')
+    DATA_PATH_ARABIC = os.path.join('../data/arabic/v1/v1/covid19_disinfo_binary_arabic_train.tsv')
     assert os.path.isfile(DATA_PATH_ENGLISH)
     assert os.path.isfile(DATA_PATH_ARABIC)
 
