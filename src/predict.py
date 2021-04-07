@@ -227,8 +227,8 @@ if __name__ == "__main__":
         logger.info(f'🔥 start prediction on test inputs..')
         test_predictions = predict(_model=model, iterator=dataloaders_dict['test'], label_fields=LABELS)
         if args.test_pred_path is not None:
-            if os.path.basename(args.test_pred_path) != '':
-                os.makedirs(os.path.basename(args.test_pred_path), exist_ok=True)
+            if os.path.dirname(args.test_pred_path) != '':
+                os.makedirs(os.path.dirname(args.test_pred_path), exist_ok=True)
             logger.info(f'writing test predictions to {args.test_pred_path}..')
             test_predictions_df = pd.DataFrame(test_predictions)
             test_predictions_df.to_csv(
