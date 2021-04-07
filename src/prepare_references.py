@@ -6,6 +6,8 @@ if __name__ == "__main__":
     DATA_DIR = '../data/prepared'
     REFERENCES_DIR = '../references'
 
+    os.makedirs(REFERENCES_DIR, exist_ok=True)
+
     # dev data
     for lang in ['en', 'bg', 'ar']:
         df = load_dataframe(os.path.join(DATA_DIR, f'dev.{lang}.tsv'))
