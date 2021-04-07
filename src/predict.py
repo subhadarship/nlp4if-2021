@@ -106,8 +106,9 @@ if __name__ == "__main__":
     }
 
     if data_dfs_dict['test'] is not None:
-        # rename column
-        data_dfs_dict['test'].rename(columns={'text': 'tweet_text'}, inplace=True)
+        if 'text' in data_dfs_dict['test'].columns:
+            # rename column
+            data_dfs_dict['test'].rename(columns={'text': 'tweet_text'}, inplace=True)
         # add dummy labels
         for idx in range(7):
             data_dfs_dict['test'][f'q{idx + 1}_label'] = ['yes'] * len(data_dfs_dict['test'])
