@@ -3,8 +3,8 @@ import os
 from data_utils import load_dataframe
 
 if __name__ == "__main__":
-    DATA_DIR = '../data/prepared'
-    REFERENCES_DIR = '../references'
+    DATA_DIR = '../data/prepared_additional'
+    REFERENCES_DIR = '../references_additional'
 
     os.makedirs(REFERENCES_DIR, exist_ok=True)
 
