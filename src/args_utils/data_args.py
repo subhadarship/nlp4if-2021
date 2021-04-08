@@ -6,9 +6,9 @@ def add_data_args(parser):
     parser.add_argument('--srclangs_with_num_samples', type=str, default='en_all,bg_100')
     parser.add_argument('--trglang', type=str, default='bg')
     parser.add_argument('--train_data_dir', type=str,
-                        default=os.path.join('../data', 'prepared'))
+                        default=os.path.join('../data', 'prepared_additional'))
     parser.add_argument('--dev_data_dir', type=str,
-                        default=os.path.join('../data', 'prepared'))
+                        default=os.path.join('../data', 'prepared_additional'))
     parser.add_argument('--test_data_dir', type=str,
                         default=None)
     parser.add_argument('--batch_size', type=int, default=4096)
