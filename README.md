@@ -49,7 +49,7 @@ chmod +x predict_best_sys.sh
 ./predict_best_sys.sh
 ```
 
-## Training logs
+#### Training logs
 
 - `logs_v1` contains the training logs while using own train-dev splits for en and ar and provided train and dev data
   for bg.
