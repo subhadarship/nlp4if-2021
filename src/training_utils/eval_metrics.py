@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 import numpy as np
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
 
 def compute_metrics(
@@ -35,10 +35,10 @@ def compute_metrics(
             f1_score(gold_labels_dict[f'q{idx + 1}'], predictions_dict[f'q{idx + 1}'], labels=all_classes,
                      average='weighted'))
         scores_dict['precision'].append(
-            f1_score(gold_labels_dict[f'q{idx + 1}'], predictions_dict[f'q{idx + 1}'], labels=all_classes,
-                     average='weighted'))
+            precision_score(gold_labels_dict[f'q{idx + 1}'], predictions_dict[f'q{idx + 1}'], labels=all_classes,
+                            average='weighted'))
         scores_dict['recall'].append(
-            f1_score(gold_labels_dict[f'q{idx + 1}'], predictions_dict[f'q{idx + 1}'], labels=all_classes,
-                     average='weighted'))
+            recall_score(gold_labels_dict[f'q{idx + 1}'], predictions_dict[f'q{idx + 1}'], labels=all_classes,
+                         average='weighted'))
 
     return {k: np.mean(v) for k, v in scores_dict.items()}
