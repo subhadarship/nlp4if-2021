@@ -1,7 +1,6 @@
 # Cross-lingual misinformation detection
 
-This repo contains the code for cross-lingual misinformation detection. See paper
-in [`NLP4IF_2021.pdf`](https://github.com/subhadarship/nlp4if-2021/blob/main/NLP4IF_2021.pdf).
+This repo contains the code for cross-lingual misinformation detection. See paper 📔 [here](https://aclanthology.org/2021.nlp4if-1.19).
 
 ## Quick start
 
@@ -18,7 +17,7 @@ For details of the data, see
 ```
 cd src
 python prepare_data.py  # prepare data without using additional data
-python prepare_data_additional.py  # prepare data without using additional data
+python prepare_data_additional.py  # prepare data with using additional data
 ```
 
 Analysis of the data is available in `notebooks/analyze_data.ipynb` and `notebooks/analyze_data_additional.ipynb`.
