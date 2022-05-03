@@ -69,3 +69,28 @@ chmod +x predict_best_sys.sh
     publisher = "Association for Computational Linguistics",
 }
 ```
+
+## Addendum
+
+Use translation for deception detection
+1. Translate the non-English test set to English and use an English model for prediction.
+2. Translate English training data to a target language and train the mBERT classification model using this translated data.
+
+### TODO
+- [ ] Translate code
+  - [ ] bg-en
+  - [ ] ar-en
+  - [ ] en-bg
+  - [ ] en-ar
+- [ ] Translate bg test set to en
+- [ ] Translate ar test set to en
+- [ ] Translate en training set to bg
+- [ ] Translate en dev set to bg
+- [ ] Translate en training set to ar
+- [ ] Translate en dev set to ar
+- [ ] Sanity check: Test bg test set and compute score using best model
+- [ ] Sanity check: Test ar test set and compute score using best model
+- [ ] Compute test F1 score for bg-en test set using best model
+- [ ] Compute test F1 score for ar-en test set using best model
+- [ ] Train m-BERT using en-bg train data and test
+- [ ] Train m-BERT using en-ar train data and test
