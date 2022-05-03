@@ -72,7 +72,7 @@ chmod +x predict_best_sys.sh
 
 ## Addendum
 
-Use translation for deception detection
+:books: **Use translation for deception detection**
 1. Translate the non-English test set to English and use an English model for prediction.
 2. Translate English training data to a target language and train the mBERT classification model using this translated data.
 
