@@ -90,7 +90,8 @@ chmod +x predict_best_sys.sh
 - [ ] Translate en dev set to ar
 - [ ] Sanity check: Test bg test set and compute score using best model
 - [ ] Sanity check: Test ar test set and compute score using best model
-- [ ] Compute test F1 score for bg-en test set using best model
-- [ ] Compute test F1 score for ar-en test set using best model
+- [ ] Compute test F1 score for bg-en test set using best en model
+- [ ] Compute test F1 score for ar-en test set using best en model
 - [ ] Train m-BERT using en-bg train data and test
 - [ ] Train m-BERT using en-ar train data and test
+- [ ] Train m-BERT using en train data and test on bg and ar separately
