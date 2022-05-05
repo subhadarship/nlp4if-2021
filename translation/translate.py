@@ -68,6 +68,6 @@ if __name__ == "__main__":
         print(f'*** {k} ***')
         _, src, trg = k.split('.')
         df = load_dataframe(v['inp'])
-        trs = translate(srclang=src, trglang=trg, sentences=df['tweet_text'].astype(str).to_list(), beam_size=beam_size)
+        trs = translate(srclang=src, trglang=trg, sentences=df['tweet_text'].astype(str).to_list(), beam_size=BEAM_SIZE)
         df['tweet_text'] = trs
         df.to_csv(v['out'], sep='\t', encoding='utf-8', index=False)
