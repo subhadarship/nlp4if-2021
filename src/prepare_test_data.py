@@ -24,6 +24,6 @@ if __name__ == "__main__":
                     'q6_label',
                     'q7_label', ]
 
-    for k, v in data_dict.items():
+    for k, v in data_paths_dict.items():
         df = pd.read_csv(k, sep='\t', encoding='utf-8', na_filter=False, names=column_names)
         df.to_csv(v, sep='\t', encoding='utf-8', index=False)
