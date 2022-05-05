@@ -1,15 +1,19 @@
+"""NOTE: this code requires torch 1.5, transformers 3.0.2"""
+
 import os
+import sys
+from typing import List
 
 import torch
-from transformers import MarianMTModel, MarianTokenizer
-from typing import List
 from tqdm import tqdm
+from transformers import MarianMTModel, MarianTokenizer
 
+sys.path.append('../src')
+from data_utils import load_dataframe
 
 
 def translate(srclang: str, trglang: str, sentences: List[str], beam_size: int) -> List[str]:
     """Translate sentences"""
-
     model_name = f'Helsinki-NLP/opus-mt-{srclang}-{trglang}'
     print(f'loading tokenizer and model for {model_name}')
     tokenizer = MarianTokenizer.from_pretrained(model_name)
@@ -39,7 +43,31 @@ def translate(srclang: str, trglang: str, sentences: List[str], beam_size: int) 
 
     return all_translations_text
 
+
 if __name__ == "__main__":
-    translations_dir = os.path.join('../data/translation_prepared_additional')
+    beam_size = 12
+    translations_dir = os.path.join('../data/translations')
     os.makedirs(translations_dir, exist_ok=True)
 
+    data_paths_dict = {
+        'train.en.bg': {'inp': os.path.join('../data/prepared_additional/train.en.tsv'),
+                        'out': os.path.join(translations_dir, 'train.en.bg.tsv')},
+        'train.en.ar': {'inp': os.path.join('../data/prepared_additional/train.en.tsv'),
+                        'out': os.path.join(translations_dir, 'train.en.ar.tsv')},
+        'dev.bg.en': {'inp': os.path.join('../data/prepared_additional/dev.bg.tsv'),
+                      'out': os.path.join(translations_dir, 'dev.bg.en.tsv')},
+        'dev.ar.en': {'inp': os.path.join('../data/prepared_additional/dev.ar.tsv'),
+                      'out': os.path.join(translations_dir, 'dev.ar.en.tsv')},
+        'test.bg.en': {'inp': os.path.join('../data/prepared_test_data/test.bg.tsv'),
+                       'out': os.path.join(translations_dir, 'test.bg.en.tsv')},
+        'test.ar.en': {'inp': os.path.join('../data/prepared_test_data/test.ar.tsv'),
+                       'out': os.path.join(translations_dir, 'test.ar.en.tsv')},
+    }
+
+    for k, v in data_paths_dict.items():
+        print(f'*** {k} ***')
+        _, src, trg = k.split('.')
+        df = load_dataframe(v['inp'])
+        trs = translate(srclang=src, trglang=trg, sentences=df['tweet_text'].astype(str).to_list(), beam_size=beam_size)
+        df['tweet_text'] = trs
+        df.to_csv(v['out'], sep='\t', encoding='utf-8', index=False)
