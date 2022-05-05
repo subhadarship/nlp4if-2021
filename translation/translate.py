@@ -1,15 +1,12 @@
 """NOTE: this code requires torch 1.5, transformers 3.0.2"""
 
 import os
-import sys
 from typing import List
 
+import pandas as pd
 import torch
 from tqdm import tqdm
 from transformers import MarianMTModel, MarianTokenizer
-
-sys.path.append('../src')
-from data_utils import load_dataframe
 
 
 def translate(srclang: str, trglang: str, sentences: List[str], beam_size: int) -> List[str]:
@@ -67,7 +64,7 @@ if __name__ == "__main__":
     for k, v in data_paths_dict.items():
         print(f'*** {k} ***')
         _, src, trg = k.split('.')
-        df = load_dataframe(v['inp'])
+        df = pd.read_csv(v['inp'], sep='\t', encoding='utf-8', na_filter=False)
         trs = translate(srclang=src, trglang=trg, sentences=df['tweet_text'].astype(str).to_list(), beam_size=BEAM_SIZE)
         df['tweet_text'] = trs
         df.to_csv(v['out'], sep='\t', encoding='utf-8', index=False)
