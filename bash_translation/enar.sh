@@ -58,7 +58,7 @@ for TRGLANG in ar; do
       CUDA_VISIBLE_DEVICES=${GPUID} python train.py \
         --train_data_dir ../data/translations \
         --dev_data_dir ../data/prepared_additional \
-        --test_data_dir ../data/prepared_additional \
+        --test_data_dir ../data/prepared_test_data \
         --srclangs_with_num_samples en.${TRGLANG}_all --trglang ${TRGLANG} --tokenization ${MBERTMODELNAME} --model_name ${MBERTMODELNAME} --bert_fc_dim ${HIDDIM} --model_dir ${MODELDIR}/${expt} --log_file_path ${LOGDIR}/${expt}.txt --lr ${LR} --batch_size 1024 --max_epochs 999 --early_stopping_patience 10 --freeze_bert
       rm -rf ${MODELDIR}/${expt}
 
