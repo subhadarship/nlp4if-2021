@@ -6,7 +6,7 @@ if __name__ == "__main__":
     write_data_dir = os.path.join('../data/prepared_test_data')
     os.makedirs(write_data_dir, exist_ok=True)
 
-    data_dict = {
+    data_paths_dict = {
         os.path.join(
             '../data/bulgarian/test-gold/test-gold/covid19_disinfo_binary_bulgarian_test_gold.tsv'): os.path.join(
             write_data_dir, 'test.bg.tsv'),
