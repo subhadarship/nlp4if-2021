@@ -34,7 +34,7 @@ def translate(srclang: str, trglang: str, sentences: List[str], beam_size: int) 
         translations = model.generate(
             input_ids=tokens_dict['input_ids'].to(device),
             attention_mask=tokens_dict['attention_mask'].to(device),
-            num_return_sequences=1, num_beams=12, do_sample=False,
+            num_return_sequences=1, num_beams=beam_size, do_sample=False,
         )
         translations_text = [tokenizer.decode(
             t, skip_special_tokens=True
@@ -45,23 +45,23 @@ def translate(srclang: str, trglang: str, sentences: List[str], beam_size: int) 
 
 
 if __name__ == "__main__":
-    beam_size = 12
-    translations_dir = os.path.join('../data/translations')
-    os.makedirs(translations_dir, exist_ok=True)
+    BEAM_SIZE = 12
+    TRANSLATIONS_DIR = os.path.join('../data/translations')
+    os.makedirs(TRANSLATIONS_DIR, exist_ok=True)
 
     data_paths_dict = {
         'train.en.bg': {'inp': os.path.join('../data/prepared_additional/train.en.tsv'),
-                        'out': os.path.join(translations_dir, 'train.en.bg.tsv')},
+                        'out': os.path.join(TRANSLATIONS_DIR, 'train.en.bg.tsv')},
         'train.en.ar': {'inp': os.path.join('../data/prepared_additional/train.en.tsv'),
-                        'out': os.path.join(translations_dir, 'train.en.ar.tsv')},
+                        'out': os.path.join(TRANSLATIONS_DIR, 'train.en.ar.tsv')},
         'dev.bg.en': {'inp': os.path.join('../data/prepared_additional/dev.bg.tsv'),
-                      'out': os.path.join(translations_dir, 'dev.bg.en.tsv')},
+                      'out': os.path.join(TRANSLATIONS_DIR, 'dev.bg.en.tsv')},
         'dev.ar.en': {'inp': os.path.join('../data/prepared_additional/dev.ar.tsv'),
-                      'out': os.path.join(translations_dir, 'dev.ar.en.tsv')},
+                      'out': os.path.join(TRANSLATIONS_DIR, 'dev.ar.en.tsv')},
         'test.bg.en': {'inp': os.path.join('../data/prepared_test_data/test.bg.tsv'),
-                       'out': os.path.join(translations_dir, 'test.bg.en.tsv')},
+                       'out': os.path.join(TRANSLATIONS_DIR, 'test.bg.en.tsv')},
         'test.ar.en': {'inp': os.path.join('../data/prepared_test_data/test.ar.tsv'),
-                       'out': os.path.join(translations_dir, 'test.ar.en.tsv')},
+                       'out': os.path.join(TRANSLATIONS_DIR, 'test.ar.en.tsv')},
     }
 
     for k, v in data_paths_dict.items():
